@@ -6,6 +6,10 @@
 
 This guide explains how to run both the **backend** and **frontend** of the Graded Reader application locally.
 
+## 🚀 Setup your DeepSeek API Key
+
+1. Open a main.py file in backend folder.
+2. Find this line and put here you API key: DEEPSEEK_API_KEY = "your-api-key" # Put you API key here
 
 ## 🚀 Running the Frontend
 
