@@ -2,6 +2,10 @@
 
 This guide explains how to run both the **backend** and **frontend** of the Graded Reader application locally.
 
+## 🚀 Open the app
+1. Type in your browser: http://127.0.0.1:8000/graded_readers/
+
+   
 ## 🚀 Running the Frontend
 
 1. Open a terminal and navigate to the frontend folder.
@@ -17,8 +21,5 @@ This guide explains how to run both the **backend** and **frontend** of the Grad
    ```sh
    python main.py
 
-## 🚀 Open the app
-1. Type in your browser: http://127.0.0.1:8000/graded_readers/
-   
 
 
