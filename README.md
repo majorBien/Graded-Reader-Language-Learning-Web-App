@@ -22,4 +22,5 @@ This guide explains how to run both the **backend** and **frontend** of the Grad
    python main.py
 
 
+![image](https://github.com/user-attachments/assets/afe89d1b-ae82-4c81-bd65-abbd4490b443)
 
