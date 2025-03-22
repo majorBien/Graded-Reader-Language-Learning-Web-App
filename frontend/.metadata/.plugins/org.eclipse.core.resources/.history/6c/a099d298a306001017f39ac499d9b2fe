@@ -1,0 +1,28 @@
+$(document).ready(function() {
+    $("#generateBtn").click(async function() {
+        let prompt = $("#prompt").val();
+        let level = $("#level").val();
+        let wordLimit = $("#wordLimit").val();
+        let language = $("input[name='language']:checked").val();
+
+        let requestData = { prompt, level, wordLimit, language };
+
+        $.ajax({
+            url: "http://127.0.0.1:5000/generate_pdf",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                if (response.success) {
+                    $("#textPreview").text(response.text);
+                    $("#pdfViewer").attr("src", response.pdf_url);
+                } else {
+                    alert("Błąd generowania PDF!");
+                }
+            },
+            error: function() {
+                alert("Nie udało się połączyć z serwerem.");
+            }
+        });
+    });
+});

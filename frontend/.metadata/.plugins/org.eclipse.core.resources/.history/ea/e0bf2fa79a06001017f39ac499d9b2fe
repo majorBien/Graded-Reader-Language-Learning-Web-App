@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graded Reader</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Graded Reader</h1>
+
+        <label for="prompt">Opis czytanki:</label>
+        <textarea id="prompt" placeholder="Wpisz temat czytanki..."></textarea>
+
+        <label for="language">Wybierz język:</label>
+        <div class="language-options">
+            <label class="lang-option">
+                <input type="radio" name="language" value="japanese" checked>
+                <img src="flags/jp.png" alt="JP"> Japoński
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="korean">
+                <img src="flags/kr.png" alt="KR"> Koreański
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="chinese">
+                <img src="flags/cn.png" alt="CN"> Chiński
+            </label>
+        </div>
+
+        <label for="level">Poziom językowy:</label>
+        <select id="level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+        </select>
+
+        <label for="wordLimit">Maksymalna liczba słów:</label>
+        <input type="number" id="wordLimit" value="1000" min="100" max="5000">
+
+        <button id="generateBtn">Generuj PDF</button>
+
+        <iframe id="pdfViewer"></iframe>
+    </div>
+</body>
+</html>

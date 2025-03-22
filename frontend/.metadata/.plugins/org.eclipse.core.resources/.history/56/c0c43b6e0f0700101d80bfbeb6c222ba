@@ -1,0 +1,82 @@
+$(document).ready(function() {
+    $("#generateBtn").click(async function() {
+        let prompt = $("#prompt").val();
+        let level = $("#level").val();
+        let wordLimit = $("#wordLimit").val();
+        let language = $("input[name='language']:checked").val();
+
+        if (!prompt || !level || !wordLimit || !language) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        let requestData = { prompt, level, wordLimit, language };
+
+        $.ajax({
+            url: "http://127.0.0.1:5000/generate_text",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                if (response.success) {
+                    $("#textPreview").empty();
+                    let words = response.text.split(/\s+/);
+                    
+                    words.forEach(word => {
+                        let span = $("<span>").text(word + " ").addClass("word");
+                        $("#textPreview").append(span);
+                    });
+
+                    $(".word").hover(
+                        function() {
+                            checkTranslationAndPronunciation($(this).text().trim(), language, $(this));
+                        },
+                        function() {
+                            $(this).tooltip("close");
+                        }
+                    );
+                } else {
+                    alert("Error generating story: " + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Failed to connect to the server: " + error);
+            }
+        });
+    });
+
+    function checkTranslationAndPronunciation(word, language, element) {
+        let apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY";
+        let apiUrl = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+
+        $.ajax({
+            url: apiUrl,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                q: word,
+                source: language,
+                target: "en",
+                format: "text"
+            }),
+            success: function(response) {
+                let translation = response.data.translations[0].translatedText;
+
+                element.tooltip({
+                    content: `Translation: ${translation}`,
+                    position: { my: "center bottom", at: "center top-10" },
+                    show: { effect: "fadeIn", duration: 300 }
+                }).tooltip("open");
+            },
+            error: function(xhr, status, error) {
+                console.error("Translation failed: ", error);
+            }
+        });
+
+        if (language === "japanese") {
+            let pronunciationUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=ja&client=gtx`;
+            let audio = new Audio(pronunciationUrl);
+            audio.play();
+        }
+    }
+});

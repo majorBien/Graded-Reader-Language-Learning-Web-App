@@ -1,0 +1,34 @@
+$(document).ready(function() {
+    $("#generateBtn").click(async function() {
+        let prompt = $("#prompt").val();
+        let level = $("#level").val();
+        let wordLimit = $("#wordLimit").val();
+        let language = $("input[name='language']:checked").val();
+
+        // Walidacja danych
+        if (!prompt || !level || !wordLimit || !language) {
+            alert("Wypełnij wszystkie pola formularza!");
+            return;
+        }
+
+        let requestData = { prompt, level, wordLimit, language };
+
+        $.ajax({
+            url: "http://127.0.0.1:5000/generate_text",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                if (response.success) {
+                    // Wyświetl wygenerowaną czytankę
+                    $("#textPreview").text(response.text);
+                } else {
+                    alert("Błąd generowania czytanki: " + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Nie udało się połączyć z serwerem: " + error);
+            }
+        });
+    });
+});

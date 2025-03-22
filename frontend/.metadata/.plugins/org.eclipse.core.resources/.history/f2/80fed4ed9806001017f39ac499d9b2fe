@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graded Reader</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Graded Reader</h1>
+    
+    <label for="language">Wybierz język:</label>
+    <select id="language">
+        <option value="japanese">Japoński</option>
+        <option value="korean">Koreański</option>
+        <option value="chinese">Chiński</option>
+    </select>
+
+    <label for="level">Wybierz poziom:</label>
+    <select id="level">
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+    </select>
+
+    <label for="prompt">Podaj temat czytanki:</label>
+    <input type="text" id="prompt" placeholder="Np. Sherlock Holmes w Japonii">
+
+    <button id="generate">Generuj PDF</button>
+
+    <h2>Podgląd PDF:</h2>
+    <canvas id="pdf-viewer"></canvas>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graded Reader</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Graded Reader</h1>
+
+        <label for="prompt">📝 Story description:</label>
+        <textarea id="prompt" placeholder="Enter the topic of the story..."></textarea>
+
+        <label for="language">🌎 Choose language:</label>
+        <div class="language-options">
+            <label class="lang-option">
+                <input type="radio" name="language" value="japanese" checked>
+                <img src="flags/jp.png" alt="JP"> Japanese
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="korean">
+                <img src="flags/kr.png" alt="KR"> Korean
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="chinese">
+                <img src="flags/cn.png" alt="CN"> Chinese
+            </label>
+        </div>
+
+        <label for="level">📚 Language level:</label>
+        <select id="level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+        </select>
+
+        <label for="wordLimit">🔢 Maximum number of words:</label>
+        <input type="number" id="wordLimit" value="1000" min="100" max="5000">
+
+        <button id="generateBtn">🚀 Generate Story</button>
+
+        <!-- Display the generated story -->
+        <div id="previewContainer">
+            <h2>📜 Generated Story</h2>
+            <div id="textPreview">The generated story will appear here...</div>
+        </div>
+    </div>
+</body>
+</html>

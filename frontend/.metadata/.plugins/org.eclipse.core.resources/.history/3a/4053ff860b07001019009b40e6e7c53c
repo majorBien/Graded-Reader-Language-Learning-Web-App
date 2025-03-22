@@ -1,0 +1,22 @@
+/* Tooltip styles */
+.ui-tooltip {
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip arrow */
+.ui-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}

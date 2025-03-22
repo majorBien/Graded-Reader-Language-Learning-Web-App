@@ -1,0 +1,19 @@
+document.getElementById("generateBtn").addEventListener("click", async () => {
+    const prompt = document.getElementById("prompt").value;
+    const level = document.getElementById("level").value;
+    const wordLimit = document.getElementById("wordLimit").value;
+    const language = document.querySelector('input[name="language"]:checked').value;
+
+    const response = await fetch("http://127.0.0.1:5000/generate_pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, level, wordLimit, language })
+    });
+
+    const data = await response.json();
+    if (data.success) {
+        document.getElementById("pdfViewer").src = data.pdf_url;
+    } else {
+        alert("Błąd generowania PDF!");
+    }
+});
