@@ -1,7 +1,9 @@
 # 📖 Graded Reader – Setup Guide
 
 
-![image](https://github.com/user-attachments/assets/089e2a2f-f179-433c-a605-591a6f4b3c4c)
+![image](https://github.com/user-attachments/assets/fd498497-21d7-4649-9808-cdcabb9dc8b9)
+
+![image](https://github.com/user-attachments/assets/6d242710-9635-4aec-ab6a-8099177a742a)
 
 
 This guide explains how to run both the **backend** and **frontend** of the Graded Reader application locally.
