@@ -101,39 +101,37 @@ $(document).ready(function() {
             translateBtn.prop("disabled", true).css("opacity", 0.5);
         }
     });
+	
 
-    // Switching full screen mode
-    $("#toggleFullscreenBtn").click(function() {
-        const previewContainer = $("#previewContainer");
-        const isFullscreen = previewContainer.hasClass("fullscreen");
 
-        if (isFullscreen) {
-            // Minimize to default size
-            previewContainer.removeClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⬜</span> Full Screen'); // Change icon and text
-        } else {
-            // Switch to full screen
-            previewContainer.addClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⭕</span> Exit Full Screen'); // Change icon and text
-        }
-    });
+	// Funkcja do przełączania trybu pełnoekranowego
+	$("#toggleFullscreenBtn").click(function() {
+	    const previewContainer = $("#previewContainer");
+	    const isFullscreen = previewContainer.hasClass("fullscreen");
 
+	    if (isFullscreen) {
+	        // Minimalizuj do domyślnego rozmiaru
+	        previewContainer.removeClass("fullscreen");
+	        $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⬜</span> Full Screen'); // Zmień ikonę i tekst
+	    } else {
+	        // Przełącz na pełny ekran
+	        previewContainer.addClass("fullscreen");
+	        $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⭕</span> Exit Full Screen'); // Zmień ikonę i tekst
+	    }
+	});
+
+
+	
+	
     // Event listener for the "Translate" button
     translateBtn.click(async function() {
         let selectedText = window.getSelection().toString().trim();
         if (selectedText) {
-            let language = $("#language").val(); // Get selected language
-            let translation = await getTranslation(selectedText, language); // Get translation
-            let pronunciation = getPronunciation(selectedText, language); // Get pronunciation
+            let language = $("#language").val(); // Poprawiony selektor
+            let translation = await getTranslation(selectedText, language);
 
-            // Prepare tooltip content
-            let tooltipContent = `Translation: ${translation}`;
-            if (pronunciation !== selectedText) { // If pronunciation is available
-                tooltipContent += `\nPronunciation: ${pronunciation}`;
-            }
-
-            // Show tooltip with translation and pronunciation
-            let tooltip = $("<div>").addClass("translationTooltip").text(tooltipContent);
+            // Show translation in a tooltip
+            let tooltip = $("<div>").addClass("translationTooltip").text(`Translation: ${translation}`);
             $("body").append(tooltip);
 
             // Position the tooltip near the selected text
@@ -158,7 +156,7 @@ $(document).ready(function() {
         let prompt = $("#prompt").val();
         let level = $("#level").val();
         let wordLimit = $("#wordLimit").val();
-        let language = $("#language").val(); // Get selected language
+        let language = $("#language").val(); // Poprawiony selektor
 
         // Validate input fields
         if (!prompt.trim() || !level || !wordLimit || !language) {

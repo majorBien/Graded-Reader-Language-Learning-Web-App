@@ -38,19 +38,19 @@
 		    <option value="turkish">Turkish</option>
 		    <option value="dutch">Dutch</option>
 		    <option value="swedish">Swedish</option>
-		    <option value="polish">Polish</option>
-		    <option value="greek">Greek</option>
-		    <option value="hebrew">Hebrew</option>
-		    <option value="irish">Irish</option>
-		    <option value="norwegian">Norwegian</option>
-		    <option value="danish">Danish</option>
-		    <option value="finnish">Finnish</option>
-		    <option value="vietnamese">Vietnamese</option>
-		    <option value="indonesian">Indonesian</option>
-		    <option value="ukrainian">Ukrainian</option>
-		    <option value="czech">Czech</option>
-		    <option value="hungarian">Hungarian</option>
-		    <option value="romanian">Romanian</option>
+		    <option value="polish">🇵Polish</option>
+		    <option value="greek">🇬🇷 Greek</option>
+		    <option value="hebrew">🇮🇱 Hebrew</option>
+		    <option value="irish">🇮🇪 Irish</option>
+		    <option value="norwegian">🇳🇴 Norwegian</option>
+		    <option value="danish">🇩🇰 Danish</option>
+		    <option value="finnish">🇫🇮 Finnish</option>
+		    <option value="vietnamese">🇻🇳 Vietnamese</option>
+		    <option value="indonesian">🇮🇩 Indonesian</option>
+		    <option value="ukrainian">🇺🇦 Ukrainian</option>
+		    <option value="czech">🇨🇿 Czech</option>
+		    <option value="hungarian">🇭🇺 Hungarian</option>
+		    <option value="romanian">🇷🇴 Romanian</option>
 		</select>
 
         <label for="level">📚 Language level:</label>
@@ -59,7 +59,6 @@
             <option value="A2">A2</option>
             <option value="B1">B1</option>
             <option value="B2">B2</option>
-			<option value="C1">C1</option>
         </select>
 
         <label for="wordLimit">🔢 Maximum number of words:</label>

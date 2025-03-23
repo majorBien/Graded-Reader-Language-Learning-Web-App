@@ -177,14 +177,33 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
+/* Style dla przycisku pełnoekranowego */
+#toggleFullscreenBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Odstęp między ikoną a tekstem */
+    transition: 0.3s;
+    margin-top: 10px; /* Odstęp od innych elementów */
+    margin-bottom: 10px; /* Odstęp od kontenera z tekstem */
+}
 
+#toggleFullscreenBtn:hover {
+    background-color: #0056b3;
+}
 
-/* Full screen icon */
+/* Ikona pełnoekranowa */
 .fullscreen-icon {
     font-size: 16px;
 }
 
-/* Container with text */
+/* Kontener z tekstem */
 #previewContainer {
     margin-top: 15px;
     text-align: left;
@@ -197,14 +216,13 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-/* Full screen mode */
+/* Tryb pełnoekranowy */
 #previewContainer.fullscreen {
     position: fixed;
     top: 0;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 80%; 
-    height: 100%; 
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1000;
     background: white;
     border-radius: 0;
@@ -212,4 +230,3 @@ button:hover {
     box-shadow: none;
     overflow-y: auto;
 }
-

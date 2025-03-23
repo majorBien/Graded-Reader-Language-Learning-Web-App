@@ -49,7 +49,7 @@
 		    <option value="indonesian">Indonesian</option>
 		    <option value="ukrainian">Ukrainian</option>
 		    <option value="czech">Czech</option>
-		    <option value="hungarian">Hungarian</option>
+		    <option value="hungarian"> Hungarian</option>
 		    <option value="romanian">Romanian</option>
 		</select>
 
@@ -66,10 +66,6 @@
         <input type="number" id="wordLimit" value="200" min="100" max="500">
 
         <button id="generateBtn">🚀 Generate Story</button>
-		<!-- Full screen button -->
-		<button id="toggleFullscreenBtn" title="Toggle fullscreen">
-		    <span class="fullscreen-icon">⬜</span> Full Screen
-		</button>
 
         <!-- Loading animation -->
         <div id="loadingIndicator" class="hidden">
@@ -77,14 +73,11 @@
             <p>⏳ Generating story, please wait...</p>
         </div>
 
-		
-
-		
         <!-- Display the generated story -->
-		<div id="previewContainer">
-		    <h2>📜 Generated Story</h2>
-		    <div id="textPreview">The generated story will appear here...</div>
-		</div>
+        <div id="previewContainer">
+            <h2>📜 Generated Story</h2>
+            <div id="textPreview">The generated story will appear here...</div>
+        </div>
     </div>
 </body>
 </html>

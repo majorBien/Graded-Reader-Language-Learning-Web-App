@@ -21,37 +21,21 @@
         <label for="prompt">📝 Story description:</label>
         <textarea id="prompt" placeholder="Enter the topic of the story..."></textarea>
 
-		<label for="language">🌎 Choose language:</label>
-		<select id="language" name="language">
-		    <option value="english">English</option>
-		    <option value="spanish">Spanish</option>
-		    <option value="french">French</option>
-		    <option value="german">German</option>
-		    <option value="italian">Italian</option>
-		    <option value="portuguese">Portuguese</option>
-		    <option value="russian">Russian</option>
-		    <option value="chinese">Chinese</option>
-		    <option value="japanese">Japanese</option>
-		    <option value="korean">Korean</option>
-		    <option value="arabic">Arabic</option>
-		    <option value="hindi">Hindi</option>
-		    <option value="turkish">Turkish</option>
-		    <option value="dutch">Dutch</option>
-		    <option value="swedish">Swedish</option>
-		    <option value="polish">Polish</option>
-		    <option value="greek">Greek</option>
-		    <option value="hebrew">Hebrew</option>
-		    <option value="irish">Irish</option>
-		    <option value="norwegian">Norwegian</option>
-		    <option value="danish">Danish</option>
-		    <option value="finnish">Finnish</option>
-		    <option value="vietnamese">Vietnamese</option>
-		    <option value="indonesian">Indonesian</option>
-		    <option value="ukrainian">Ukrainian</option>
-		    <option value="czech">Czech</option>
-		    <option value="hungarian">Hungarian</option>
-		    <option value="romanian">Romanian</option>
-		</select>
+        <label for="language">🌎 Choose language:</label>
+        <div class="language-options">
+            <label class="lang-option">
+                <input type="radio" name="language" value="japanese" checked>
+                <img src="flags/jp.png" alt="JP"> Japanese
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="korean">
+                <img src="flags/kr.png" alt="KR"> Korean
+            </label>
+            <label class="lang-option">
+                <input type="radio" name="language" value="chinese">
+                <img src="flags/cn.png" alt="CN"> Chinese
+            </label>
+        </div>
 
         <label for="level">📚 Language level:</label>
         <select id="level">
@@ -59,17 +43,12 @@
             <option value="A2">A2</option>
             <option value="B1">B1</option>
             <option value="B2">B2</option>
-			<option value="C1">C1</option>
         </select>
 
         <label for="wordLimit">🔢 Maximum number of words:</label>
         <input type="number" id="wordLimit" value="200" min="100" max="500">
 
         <button id="generateBtn">🚀 Generate Story</button>
-		<!-- Full screen button -->
-		<button id="toggleFullscreenBtn" title="Toggle fullscreen">
-		    <span class="fullscreen-icon">⬜</span> Full Screen
-		</button>
 
         <!-- Loading animation -->
         <div id="loadingIndicator" class="hidden">
@@ -77,14 +56,11 @@
             <p>⏳ Generating story, please wait...</p>
         </div>
 
-		
-
-		
         <!-- Display the generated story -->
-		<div id="previewContainer">
-		    <h2>📜 Generated Story</h2>
-		    <div id="textPreview">The generated story will appear here...</div>
-		</div>
+        <div id="previewContainer">
+            <h2>📜 Generated Story</h2>
+            <div id="textPreview">The generated story will appear here...</div>
+        </div>
     </div>
 </body>
 </html>

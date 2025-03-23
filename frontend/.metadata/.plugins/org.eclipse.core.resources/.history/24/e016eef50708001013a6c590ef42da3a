@@ -201,10 +201,9 @@ button:hover {
 #previewContainer.fullscreen {
     position: fixed;
     top: 0;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 80%; 
-    height: 100%; 
+    left: 0;
+    width: 80%;
+    height: 100%;
     z-index: 1000;
     background: white;
     border-radius: 0;
@@ -212,4 +211,3 @@ button:hover {
     box-shadow: none;
     overflow-y: auto;
 }
-

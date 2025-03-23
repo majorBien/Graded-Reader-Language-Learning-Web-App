@@ -213,3 +213,26 @@ button:hover {
     overflow-y: auto;
 }
 
+.translationTooltip {
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 1000;
+    white-space: pre-line; /* Zachowaj formatowanie z \n */
+}
+
+.translationTooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}

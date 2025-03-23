@@ -31,47 +31,13 @@ $(document).ready(function() {
         try {
             // Map your language values to MyMemory language codes
             const languageMap = {
-                english: "en",
-                spanish: "es",
-                french: "fr",
-                german: "de",
-                italian: "it",
-                portuguese: "pt",
-                russian: "ru",
-                chinese: "zh-CN",
                 japanese: "ja",
                 korean: "ko",
-                arabic: "ar",
-                hindi: "hi",
-                turkish: "tr",
-                dutch: "nl",
-                swedish: "sv",
-                polish: "pl",
-                greek: "el",
-                hebrew: "he",
-                irish: "ga",
-                norwegian: "no",
-                danish: "da",
-                finnish: "fi",
-                vietnamese: "vi",
-                indonesian: "id",
-                ukrainian: "uk",
-                czech: "cs",
-                hungarian: "hu",
-                romanian: "ro"
+                chinese: "zh-CN"
             };
 
-            // Get the MyMemory language code
-            const sourceLang = languageMap[language];
-            if (!sourceLang) {
-                console.error("Unsupported language:", language);
-                return "Unsupported language"; // Fallback if language is not supported
-            }
-
             // Use MyMemory API to translate a single word
-            let response = await fetch(
-                `https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=${sourceLang}|en`
-            );
+            let response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=${languageMap[language]}|en`);
             let data = await response.json();
             console.log("Translation response:", data);
 
@@ -102,38 +68,15 @@ $(document).ready(function() {
         }
     });
 
-    // Switching full screen mode
-    $("#toggleFullscreenBtn").click(function() {
-        const previewContainer = $("#previewContainer");
-        const isFullscreen = previewContainer.hasClass("fullscreen");
-
-        if (isFullscreen) {
-            // Minimize to default size
-            previewContainer.removeClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⬜</span> Full Screen'); // Change icon and text
-        } else {
-            // Switch to full screen
-            previewContainer.addClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⭕</span> Exit Full Screen'); // Change icon and text
-        }
-    });
-
     // Event listener for the "Translate" button
     translateBtn.click(async function() {
         let selectedText = window.getSelection().toString().trim();
         if (selectedText) {
-            let language = $("#language").val(); // Get selected language
-            let translation = await getTranslation(selectedText, language); // Get translation
-            let pronunciation = getPronunciation(selectedText, language); // Get pronunciation
+            let language = $("input[name='language']:checked").val();
+            let translation = await getTranslation(selectedText, language);
 
-            // Prepare tooltip content
-            let tooltipContent = `Translation: ${translation}`;
-            if (pronunciation !== selectedText) { // If pronunciation is available
-                tooltipContent += `\nPronunciation: ${pronunciation}`;
-            }
-
-            // Show tooltip with translation and pronunciation
-            let tooltip = $("<div>").addClass("translationTooltip").text(tooltipContent);
+            // Show translation in a tooltip
+            let tooltip = $("<div>").addClass("translationTooltip").text(`Translation: ${translation}`);
             $("body").append(tooltip);
 
             // Position the tooltip near the selected text
@@ -158,10 +101,10 @@ $(document).ready(function() {
         let prompt = $("#prompt").val();
         let level = $("#level").val();
         let wordLimit = $("#wordLimit").val();
-        let language = $("#language").val(); // Get selected language
+        let language = $("input[name='language']:checked").val();
 
         // Validate input fields
-        if (!prompt.trim() || !level || !wordLimit || !language) {
+        if (!prompt || !level || !wordLimit || !language) {
             alert("Please fill in all fields!");
             return;
         }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graded Reader</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Add libraries for transliteration -->
+    <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
+    <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
+    <script src="https://unpkg.com/pinyin@4.0.0/dist/pinyin.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Graded Reader</h1>
+
+        <label for="prompt">📝 Story description:</label>
+        <textarea id="prompt" placeholder="Enter the topic of the story..."></textarea>
+
+		<label for="language">🌎 Choose language:</label>
+		<select id="language" name="language">
+		    <option value="english" data-icon="flags/us.png">English</option>
+		    <option value="spanish" data-icon="flags/es.png">Spanish</option>
+		    <option value="french" data-icon="flags/fr.png">French</option>
+		    <option value="german" data-icon="flags/de.png">German</option>
+		    <option value="italian" data-icon="flags/it.png">Italian</option>
+		    <option value="portuguese" data-icon="flags/pt.png">Portuguese</option>
+		    <option value="russian" data-icon="flags/ru.png">Russian</option>
+		    <option value="chinese" data-icon="flags/cn.png">Chinese</option>
+		    <option value="japanese" data-icon="flags/jp.png">Japanese</option>
+		    <option value="korean" data-icon="flags/kr.png">Korean</option>
+		    <option value="arabic" data-icon="flags/ae.png">Arabic</option>
+		    <option value="hindi" data-icon="flags/in.png">Hindi</option>
+		    <option value="turkish" data-icon="flags/tr.png">Turkish</option>
+		    <option value="dutch" data-icon="flags/nl.png">Dutch</option>
+		    <option value="swedish" data-icon="flags/se.png">Swedish</option>
+		    <option value="polish" data-icon="flags/pl.png">Polish</option>
+		    <option value="greek" data-icon="flags/gr.png">Greek</option>
+		    <option value="hebrew" data-icon="flags/il.png">Hebrew</option>
+		    <option value="irish" data-icon="flags/ie.png">Irish</option>
+		    <option value="norwegian" data-icon="flags/no.png">Norwegian</option>
+		    <option value="danish" data-icon="flags/dk.png">Danish</option>
+		    <option value="finnish" data-icon="flags/fi.png">Finnish</option>
+		    <option value="vietnamese" data-icon="flags/vn.png">Vietnamese</option>
+		    <option value="indonesian" data-icon="flags/id.png">Indonesian</option>
+		    <option value="ukrainian" data-icon="flags/ua.png">Ukrainian</option>
+		    <option value="czech" data-icon="flags/cz.png">Czech</option>
+		    <option value="hungarian" data-icon="flags/hu.png">Hungarian</option>
+		    <option value="romanian" data-icon="flags/ro.png">Romanian</option>
+		</select>
+
+        <label for="level">📚 Language level:</label>
+        <select id="level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+        </select>
+
+        <label for="wordLimit">🔢 Maximum number of words:</label>
+        <input type="number" id="wordLimit" value="200" min="100" max="500">
+
+        <button id="generateBtn">🚀 Generate Story</button>
+
+        <!-- Loading animation -->
+        <div id="loadingIndicator" class="hidden">
+            <div class="spinner"></div>
+            <p>⏳ Generating story, please wait...</p>
+        </div>
+
+        <!-- Display the generated story -->
+        <div id="previewContainer">
+            <h2>📜 Generated Story</h2>
+            <div id="textPreview">The generated story will appear here...</div>
+        </div>
+    </div>
+</body>
+</html>

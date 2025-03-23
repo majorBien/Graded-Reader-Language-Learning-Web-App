@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graded Reader</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Add libraries for transliteration -->
+    <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
+    <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
+    <script src="https://unpkg.com/pinyin@4.0.0/dist/pinyin.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Graded Reader</h1>
+
+        <label for="prompt">📝 Story description:</label>
+        <textarea id="prompt" placeholder="Enter the topic of the story..."></textarea>
+
+		<label for="language">🌎 Choose language:</label>
+		<div class="custom-select">
+		    <div class="selected-option">
+		        <img src="flags/us.png" class="flag-icon" alt="English">
+		        <span>English</span>
+		    </div>
+		    <ul class="options">
+		        <li data-value="english">
+		            <img src="flags/us.png" class="flag-icon" alt="English">
+		            <span>English</span>
+		        </li>
+		        <li data-value="spanish">
+		            <img src="flags/es.png" class="flag-icon" alt="Spanish">
+		            <span>Spanish</span>
+		        </li>
+		        <li data-value="french">
+		            <img src="flags/fr.png" class="flag-icon" alt="French">
+		            <span>French</span>
+		        </li>
+		        <li data-value="german">
+		            <img src="flags/de.png" class="flag-icon" alt="German">
+		            <span>German</span>
+		        </li>
+		        <li data-value="italian">
+		            <img src="flags/it.png" class="flag-icon" alt="Italian">
+		            <span>Italian</span>
+		        </li>
+		        <li data-value="portuguese">
+		            <img src="flags/pt.png" class="flag-icon" alt="Portuguese">
+		            <span>Portuguese</span>
+		        </li>
+		        <li data-value="russian">
+		            <img src="flags/ru.png" class="flag-icon" alt="Russian">
+		            <span>Russian</span>
+		        </li>
+		        <li data-value="chinese">
+		            <img src="flags/cn.png" class="flag-icon" alt="Chinese">
+		            <span>Chinese</span>
+		        </li>
+		        <li data-value="japanese">
+		            <img src="flags/jp.png" class="flag-icon" alt="Japanese">
+		            <span>Japanese</span>
+		        </li>
+		        <li data-value="korean">
+		            <img src="flags/kr.png" class="flag-icon" alt="Korean">
+		            <span>Korean</span>
+		        </li>
+		        <li data-value="arabic">
+		            <img src="flags/ae.png" class="flag-icon" alt="Arabic">
+		            <span>Arabic</span>
+		        </li>
+		        <li data-value="hindi">
+		            <img src="flags/in.png" class="flag-icon" alt="Hindi">
+		            <span>Hindi</span>
+		        </li>
+		        <li data-value="turkish">
+		            <img src="flags/tr.png" class="flag-icon" alt="Turkish">
+		            <span>Turkish</span>
+		        </li>
+		        <li data-value="dutch">
+		            <img src="flags/nl.png" class="flag-icon" alt="Dutch">
+		            <span>Dutch</span>
+		        </li>
+		        <li data-value="swedish">
+		            <img src="flags/se.png" class="flag-icon" alt="Swedish">
+		            <span>Swedish</span>
+		        </li>
+		        <li data-value="polish">
+		            <img src="flags/pl.png" class="flag-icon" alt="Polish">
+		            <span>Polish</span>
+		        </li>
+		        <li data-value="greek">
+		            <img src="flags/gr.png" class="flag-icon" alt="Greek">
+		            <span>Greek</span>
+		        </li>
+		        <li data-value="hebrew">
+		            <img src="flags/il.png" class="flag-icon" alt="Hebrew">
+		            <span>Hebrew</span>
+		        </li>
+		        <li data-value="irish">
+		            <img src="flags/ie.png" class="flag-icon" alt="Irish">
+		            <span>Irish</span>
+		        </li>
+		        <li data-value="norwegian">
+		            <img src="flags/no.png" class="flag-icon" alt="Norwegian">
+		            <span>Norwegian</span>
+		        </li>
+		        <li data-value="danish">
+		            <img src="flags/dk.png" class="flag-icon" alt="Danish">
+		            <span>Danish</span>
+		        </li>
+		        <li data-value="finnish">
+		            <img src="flags/fi.png" class="flag-icon" alt="Finnish">
+		            <span>Finnish</span>
+		        </li>
+		        <li data-value="vietnamese">
+		            <img src="flags/vn.png" class="flag-icon" alt="Vietnamese">
+		            <span>Vietnamese</span>
+		        </li>
+		        <li data-value="indonesian">
+		            <img src="flags/id.png" class="flag-icon" alt="Indonesian">
+		            <span>Indonesian</span>
+		        </li>
+		        <li data-value="ukrainian">
+		            <img src="flags/ua.png" class="flag-icon" alt="Ukrainian">
+		            <span>Ukrainian</span>
+		        </li>
+		        <li data-value="czech">
+		            <img src="flags/cz.png" class="flag-icon" alt="Czech">
+		            <span>Czech</span>
+		        </li>
+		        <li data-value="hungarian">
+		            <img src="flags/hu.png" class="flag-icon" alt="Hungarian">
+		            <span>Hungarian</span>
+		        </li>
+		        <li data-value="romanian">
+		            <img src="flags/ro.png" class="flag-icon" alt="Romanian">
+		            <span>Romanian</span>
+		        </li>
+		    </ul>
+		</div>
+		<input type="hidden" id="language" name="language" value="english">
+        <label for="level">📚 Language level:</label>
+        <select id="level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+        </select>
+
+        <label for="wordLimit">🔢 Maximum number of words:</label>
+        <input type="number" id="wordLimit" value="200" min="100" max="500">
+
+        <button id="generateBtn">🚀 Generate Story</button>
+
+        <!-- Loading animation -->
+        <div id="loadingIndicator" class="hidden">
+            <div class="spinner"></div>
+            <p>⏳ Generating story, please wait...</p>
+        </div>
+
+        <!-- Display the generated story -->
+        <div id="previewContainer">
+            <h2>📜 Generated Story</h2>
+            <div id="textPreview">The generated story will appear here...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -31,6 +31,14 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Styl dla ikon */
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
 /* Tooltip arrow */
 .ui-tooltip::after {
     content: "";
@@ -176,40 +184,3 @@ button:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-
-
-/* Full screen icon */
-.fullscreen-icon {
-    font-size: 16px;
-}
-
-/* Container with text */
-#previewContainer {
-    margin-top: 15px;
-    text-align: left;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    max-height: 200px;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-}
-
-/* Full screen mode */
-#previewContainer.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 80%; 
-    height: 100%; 
-    z-index: 1000;
-    background: white;
-    border-radius: 0;
-    padding: 20px;
-    box-shadow: none;
-    overflow-y: auto;
-}
-

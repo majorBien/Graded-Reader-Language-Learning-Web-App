@@ -123,8 +123,15 @@ $(document).ready(function() {
         let selectedText = window.getSelection().toString().trim();
         if (selectedText) {
             let language = $("#language").val(); // Get selected language
-            let translation = await getTranslation(selectedText, language); // Get translation
-            let pronunciation = getPronunciation(selectedText, language); // Get pronunciation
+            console.log("Selected language:", language); // Debug log
+
+            // Get translation
+            let translation = await getTranslation(selectedText, language);
+            console.log("Translation:", translation); // Debug log
+
+            // Get pronunciation
+            let pronunciation = getPronunciation(selectedText, language);
+            console.log("Pronunciation:", pronunciation); // Debug log
 
             // Prepare tooltip content
             let tooltipContent = `Translation: ${translation}`;

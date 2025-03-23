@@ -101,64 +101,71 @@ $(document).ready(function() {
             translateBtn.prop("disabled", true).css("opacity", 0.5);
         }
     });
+	
 
-    // Switching full screen mode
-    $("#toggleFullscreenBtn").click(function() {
-        const previewContainer = $("#previewContainer");
-        const isFullscreen = previewContainer.hasClass("fullscreen");
 
-        if (isFullscreen) {
-            // Minimize to default size
-            previewContainer.removeClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⬜</span> Full Screen'); // Change icon and text
-        } else {
-            // Switch to full screen
-            previewContainer.addClass("fullscreen");
-            $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⭕</span> Exit Full Screen'); // Change icon and text
-        }
-    });
+	// Switching full screen mode
+	$("#toggleFullscreenBtn").click(function() {
+	    const previewContainer = $("#previewContainer");
+	    const isFullscreen = previewContainer.hasClass("fullscreen");
 
+	    if (isFullscreen) {
+	        // Minimalize to default size
+	        previewContainer.removeClass("fullscreen");
+	        $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⬜</span> Full Screen'); // Zmień ikonę i tekst
+	    } else {
+	        // Switch to full screen
+	        previewContainer.addClass("fullscreen");
+	        $("#toggleFullscreenBtn").html('<span class="fullscreen-icon">⭕</span> Exit Full Screen'); // Zmień ikonę i tekst
+	    }
+	});
+
+
+	
+	
     // Event listener for the "Translate" button
-    translateBtn.click(async function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            let language = $("#language").val(); // Get selected language
-            let translation = await getTranslation(selectedText, language); // Get translation
-            let pronunciation = getPronunciation(selectedText, language); // Get pronunciation
 
-            // Prepare tooltip content
-            let tooltipContent = `Translation: ${translation}`;
-            if (pronunciation !== selectedText) { // If pronunciation is available
-                tooltipContent += `\nPronunciation: ${pronunciation}`;
-            }
+	// Event listener dla przycisku "Translate"
+	translateBtn.click(async function() {
+	    let selectedText = window.getSelection().toString().trim();
+	    if (selectedText) {
+	        let language = $("#language").val(); // Pobierz wybrany język
+	        let translation = await getTranslation(selectedText, language); // Tłumaczenie
+	        let pronunciation = getPronunciation(selectedText, language); // Wymowa
 
-            // Show tooltip with translation and pronunciation
-            let tooltip = $("<div>").addClass("translationTooltip").text(tooltipContent);
-            $("body").append(tooltip);
+	        // Przygotuj treść dymka
+	        let tooltipContent = `Translation: ${translation}`;
+	        if (pronunciation !== selectedText) { // Jeśli wymowa jest dostępna
+	            tooltipContent += `\nPronunciation: ${pronunciation}`;
+	        }
 
-            // Position the tooltip near the selected text
-            let range = window.getSelection().getRangeAt(0);
-            let rect = range.getBoundingClientRect();
-            tooltip.css({
-                position: "absolute",
-                top: rect.bottom + window.scrollY + 5,
-                left: rect.left + window.scrollX,
-                zIndex: 1000
-            });
+	        // Pokaż dymek z tłumaczeniem i wymową
+	        let tooltip = $("<div>").addClass("translationTooltip").text(tooltipContent);
+	        $("body").append(tooltip);
 
-            // Remove the tooltip after 3 seconds
-            setTimeout(() => {
-                tooltip.remove();
-            }, 3000);
-        }
-    });
+	        // Pozycjonuj dymek w pobliżu zaznaczonego tekstu
+	        let range = window.getSelection().getRangeAt(0);
+	        let rect = range.getBoundingClientRect();
+	        tooltip.css({
+	            position: "absolute",
+	            top: rect.bottom + window.scrollY + 5,
+	            left: rect.left + window.scrollX,
+	            zIndex: 1000
+	        });
+
+	        // Usuń dymek po 3 sekundach
+	        setTimeout(() => {
+	            tooltip.remove();
+	        }, 3000);
+	    }
+	});
 
     // Event listener for the "Generate Story" button
     $("#generateBtn").click(async function() {
         let prompt = $("#prompt").val();
         let level = $("#level").val();
         let wordLimit = $("#wordLimit").val();
-        let language = $("#language").val(); // Get selected language
+        let language = $("#language").val(); // Poprawiony selektor
 
         // Validate input fields
         if (!prompt.trim() || !level || !wordLimit || !language) {
