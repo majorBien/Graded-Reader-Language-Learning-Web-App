@@ -1,10 +1,6 @@
 # 📖 Graded Reader – Setup Guide
 
 
-![image](https://github.com/user-attachments/assets/fd498497-21d7-4649-9808-cdcabb9dc8b9)
-
-![image](https://github.com/user-attachments/assets/35bf3f33-e5ae-4ed7-a0e4-0d551b8f34ec)
-
 
 This guide explains how to run both the **backend** and **frontend** of the Graded Reader application locally.
 
@@ -30,3 +26,6 @@ This guide explains how to run both the **backend** and **frontend** of the Grad
 1. Type in your browser: http://127.0.0.1:8000/graded_readers/
 
    
+![image](https://github.com/user-attachments/assets/fd498497-21d7-4649-9808-cdcabb9dc8b9)
+
+![image](https://github.com/user-attachments/assets/35bf3f33-e5ae-4ed7-a0e4-0d551b8f34ec)
