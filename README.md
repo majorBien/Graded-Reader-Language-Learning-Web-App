@@ -3,7 +3,7 @@
 
 ![image](https://github.com/user-attachments/assets/fd498497-21d7-4649-9808-cdcabb9dc8b9)
 
-![image](https://github.com/user-attachments/assets/6d242710-9635-4aec-ab6a-8099177a742a)
+![image](https://github.com/user-attachments/assets/35bf3f33-e5ae-4ed7-a0e4-0d551b8f34ec)
 
 
 This guide explains how to run both the **backend** and **frontend** of the Graded Reader application locally.
