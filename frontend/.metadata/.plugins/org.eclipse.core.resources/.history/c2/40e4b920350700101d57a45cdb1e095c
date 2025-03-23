@@ -52,50 +52,6 @@ $(document).ready(function() {
         }
     }
 
-    // Add the "Translate" button to the container
-    let translateBtn = $("<button>").text("Translate").addClass("translateBtn").prop("disabled", true);
-    $(".container").append(translateBtn);
-
-    // Event listener for text selection
-    $("#textPreview").on("mouseup", function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            // Enable and highlight the "Translate" button
-            translateBtn.prop("disabled", false).css("opacity", 1);
-        } else {
-            // Disable and gray out the "Translate" button
-            translateBtn.prop("disabled", true).css("opacity", 0.5);
-        }
-    });
-
-    // Event listener for the "Translate" button
-    translateBtn.click(async function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            let language = $("input[name='language']:checked").val();
-            let translation = await getTranslation(selectedText, language);
-
-            // Show translation in a tooltip
-            let tooltip = $("<div>").addClass("translationTooltip").text(`Translation: ${translation}`);
-            $("body").append(tooltip);
-
-            // Position the tooltip near the selected text
-            let range = window.getSelection().getRangeAt(0);
-            let rect = range.getBoundingClientRect();
-            tooltip.css({
-                position: "absolute",
-                top: rect.bottom + window.scrollY + 5,
-                left: rect.left + window.scrollX,
-                zIndex: 1000
-            });
-
-            // Remove the tooltip after 3 seconds
-            setTimeout(() => {
-                tooltip.remove();
-            }, 3000);
-        }
-    });
-
     // Event listener for the "Generate Story" button
     $("#generateBtn").click(async function() {
         let prompt = $("#prompt").val();
@@ -134,6 +90,42 @@ $(document).ready(function() {
                     words.forEach(word => {
                         let span = $("<span>").text(word + " ").addClass("word");
                         $("#textPreview").append(span);
+                    });
+
+                    // Add event listener for text selection
+                    $("#textPreview").on("mouseup", function() {
+                        let selectedText = window.getSelection().toString().trim();
+                        if (selectedText) {
+                            // Show the "Translate" button near the selected text
+                            let translateBtn = $("<button>").text("Translate").addClass("translateBtn");
+                            let range = window.getSelection().getRangeAt(0);
+                            let rect = range.getBoundingClientRect();
+
+                            // Position the button near the selected text
+                            translateBtn.css({
+                                position: "absolute",
+                                top: rect.bottom + window.scrollY + 5,
+                                left: rect.left + window.scrollX,
+                                zIndex: 1000
+                            });
+
+                            // Remove any existing translate button
+                            $(".translateBtn").remove();
+
+                            // Append the button to the body
+                            $("body").append(translateBtn);
+
+                            // Translate the selected text when the button is clicked
+                            translateBtn.click(async function() {
+                                let language = $("input[name='language']:checked").val();
+                                let translation = await getTranslation(selectedText, language);
+                                alert(`Selected Text: ${selectedText}\nTranslation: ${translation}`);
+                                translateBtn.remove(); // Remove the button after translation
+                            });
+                        } else {
+                            // Remove the translate button if no text is selected
+                            $(".translateBtn").remove();
+                        }
                     });
                 } else {
                     alert("Error generating story: " + response.error);

@@ -52,50 +52,6 @@ $(document).ready(function() {
         }
     }
 
-    // Add the "Translate" button to the container
-    let translateBtn = $("<button>").text("Translate").addClass("translateBtn").prop("disabled", true);
-    $(".container").append(translateBtn);
-
-    // Event listener for text selection
-    $("#textPreview").on("mouseup", function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            // Enable and highlight the "Translate" button
-            translateBtn.prop("disabled", false).css("opacity", 1);
-        } else {
-            // Disable and gray out the "Translate" button
-            translateBtn.prop("disabled", true).css("opacity", 0.5);
-        }
-    });
-
-    // Event listener for the "Translate" button
-    translateBtn.click(async function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            let language = $("input[name='language']:checked").val();
-            let translation = await getTranslation(selectedText, language);
-
-            // Show translation in a tooltip
-            let tooltip = $("<div>").addClass("translationTooltip").text(`Translation: ${translation}`);
-            $("body").append(tooltip);
-
-            // Position the tooltip near the selected text
-            let range = window.getSelection().getRangeAt(0);
-            let rect = range.getBoundingClientRect();
-            tooltip.css({
-                position: "absolute",
-                top: rect.bottom + window.scrollY + 5,
-                left: rect.left + window.scrollX,
-                zIndex: 1000
-            });
-
-            // Remove the tooltip after 3 seconds
-            setTimeout(() => {
-                tooltip.remove();
-            }, 3000);
-        }
-    });
-
     // Event listener for the "Generate Story" button
     $("#generateBtn").click(async function() {
         let prompt = $("#prompt").val();
@@ -134,6 +90,19 @@ $(document).ready(function() {
                     words.forEach(word => {
                         let span = $("<span>").text(word + " ").addClass("word");
                         $("#textPreview").append(span);
+                    });
+
+                    // Add click event to each word for translation
+                    $(".word").click(async function() {
+                        let word = $(this).text().trim();
+                        let language = $("input[name='language']:checked").val();
+
+                        // Get pronunciation and translation
+                        let pronunciation = getPronunciation(word, language);
+                        let translation = await getTranslation(word, language);
+
+                        // Show translation in a tooltip or alert
+                        alert(`Word: ${word}\nPronunciation: ${pronunciation}\nTranslation: ${translation}`);
                     });
                 } else {
                     alert("Error generating story: " + response.error);

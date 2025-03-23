@@ -115,64 +115,8 @@ button:hover {
     text-align: center;
     margin-top: 20px;
 }
-/* Style for the Translate button */
-.translateBtn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    opacity: 0.5; /* Initially grayed out */
-    margin-top: 10px; /* Space above the button */
-}
-
-.translateBtn:hover {
-    background-color: #0056b3;
-}
-
-.translateBtn:disabled {
-    cursor: not-allowed;
-    background-color: #cccccc;
-}
-
-/* Style for the translation tooltip */
-.translationTooltip {
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    z-index: 1000;
-}
-
-.translationTooltip::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #333 transparent transparent transparent;
-}
 
 .spinner {
     border: 6px solid rgba(0, 0, 0, 0.2);
     border-top: 6px solid #3498db;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+    border-radius: 

@@ -1,0 +1,46 @@
+$(document).ready(function() {
+    $("#generateBtn").click(async function() {
+        let prompt = $("#prompt").val();
+        let level = $("#level").val();
+        let wordLimit = $("#wordLimit").val();
+        let language = $("input[name='language']:checked").val();
+
+        if (!prompt || !level || !wordLimit || !language) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        let requestData = { prompt, level, wordLimit, language };
+
+        // show laoding animation
+        $("#loadingIndicator").removeClass("hidden");
+        $("#textPreview").html("");
+
+        $.ajax({
+            url: "http://127.0.0.1:5000/generate_text",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                // hinde loading animation
+                $("#loadingIndicator").addClass("hidden");
+
+                if (response.success) {
+                    $("#textPreview").empty();
+                    let words = response.text.split(/\s+/);
+
+                    words.forEach(word => {
+                        let span = $("<span>").text(word + " ").addClass("word");
+                        $("#textPreview").append(span);
+                    });
+                } else {
+                    alert("Error generating story: " + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                $("#loadingIndicator").addClass("hidden");
+                alert("Failed to connect to the server: " + error);
+            }
+        });
+    });
+});

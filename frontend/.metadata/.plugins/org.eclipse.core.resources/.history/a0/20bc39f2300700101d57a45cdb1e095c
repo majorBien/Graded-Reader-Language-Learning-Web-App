@@ -12,6 +12,28 @@ $(document).ready(function() {
         console.error("Kuroshiro or its analyzer is not loaded.");
     }
 
+    // Initialize tooltips for words
+    $(document).tooltip({
+        items: ".word",
+        content: function() {
+            let word = $(this).text().trim(); // Get the word
+            let language = $("input[name='language']:checked").val(); // Get selected language
+            return `<strong>${word}</strong><br>Pronunciation: <em>${getPronunciation(word, language)}</em><br>Translation: <em>${getTranslation(word, language)}</em>`;
+        },
+        position: {
+            my: "center bottom-20",
+            at: "center top",
+            using: function(position, feedback) {
+                $(this).css(position);
+                $("<div>")
+                    .addClass("arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(feedback.horizontal)
+                    .appendTo(this);
+            }
+        }
+    });
+
     // Function to get pronunciation (e.g., romaji for Japanese, pinyin for Chinese)
     function getPronunciation(word, language) {
         console.log("Getting pronunciation for:", word, "in language:", language);
@@ -25,76 +47,19 @@ $(document).ready(function() {
         return word; // For other languages, return the original word
     }
 
-    // Function to get translation using MyMemory API
+    // Function to get translation using DeepL API
     async function getTranslation(word, language) {
         console.log("Getting translation for:", word, "from language:", language);
         try {
-            // Map your language values to MyMemory language codes
-            const languageMap = {
-                japanese: "ja",
-                korean: "ko",
-                chinese: "zh-CN"
-            };
-
-            // Use MyMemory API to translate a single word
-            let response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=${languageMap[language]}|en`);
+            let response = await fetch(`https://api-free.deepl.com/v2/translate?auth_key=YOUR_DEEPL_API_KEY&text=${word}&source_lang=${language.toUpperCase()}&target_lang=EN`);
             let data = await response.json();
             console.log("Translation response:", data);
-
-            if (data.responseData && data.responseData.translatedText) {
-                return data.responseData.translatedText; // Return the translated text
-            } else {
-                return "Translation not available"; // Fallback if translation fails
-            }
+            return data.translations[0].text; // Return the translated text
         } catch (error) {
             console.error("Translation error:", error);
             return "Translation not available"; // Fallback if translation fails
         }
     }
-
-    // Add the "Translate" button to the container
-    let translateBtn = $("<button>").text("Translate").addClass("translateBtn").prop("disabled", true);
-    $(".container").append(translateBtn);
-
-    // Event listener for text selection
-    $("#textPreview").on("mouseup", function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            // Enable and highlight the "Translate" button
-            translateBtn.prop("disabled", false).css("opacity", 1);
-        } else {
-            // Disable and gray out the "Translate" button
-            translateBtn.prop("disabled", true).css("opacity", 0.5);
-        }
-    });
-
-    // Event listener for the "Translate" button
-    translateBtn.click(async function() {
-        let selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            let language = $("input[name='language']:checked").val();
-            let translation = await getTranslation(selectedText, language);
-
-            // Show translation in a tooltip
-            let tooltip = $("<div>").addClass("translationTooltip").text(`Translation: ${translation}`);
-            $("body").append(tooltip);
-
-            // Position the tooltip near the selected text
-            let range = window.getSelection().getRangeAt(0);
-            let rect = range.getBoundingClientRect();
-            tooltip.css({
-                position: "absolute",
-                top: rect.bottom + window.scrollY + 5,
-                left: rect.left + window.scrollX,
-                zIndex: 1000
-            });
-
-            // Remove the tooltip after 3 seconds
-            setTimeout(() => {
-                tooltip.remove();
-            }, 3000);
-        }
-    });
 
     // Event listener for the "Generate Story" button
     $("#generateBtn").click(async function() {
@@ -135,6 +100,9 @@ $(document).ready(function() {
                         let span = $("<span>").text(word + " ").addClass("word");
                         $("#textPreview").append(span);
                     });
+
+                    // Reinitialize tooltips for the new words
+                    $(document).tooltip("refresh");
                 } else {
                     alert("Error generating story: " + response.error);
                 }

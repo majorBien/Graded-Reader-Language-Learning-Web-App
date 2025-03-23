@@ -1,0 +1,94 @@
+$(document).ready(function() {
+    // Initialize tooltips for words
+    $(document).tooltip({
+        items: ".word",
+        content: function() {
+            let word = $(this).text().trim(); // Get the word
+            let language = $("input[name='language']:checked").val(); // Get selected language
+            return `<strong>${word}</strong><br>Pronunciation: <em>${getPronunciation(word, language)}</em><br>Translation: <em>${getTranslation(word, language)}</em>`;
+        },
+        position: {
+            my: "center bottom-20",
+            at: "center top",
+            using: function(position, feedback) {
+                $(this).css(position);
+                $("<div>")
+                    .addClass("arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(feedback.horizontal)
+                    .appendTo(this);
+            }
+        }
+    });
+
+    // Function to get pronunciation (e.g., romaji for Japanese, pinyin for Chinese)
+    function getPronunciation(word, language) {
+        // Add logic for transliteration based on language
+        if (language === "japanese") {
+            return kuroshiro.toRomaji(word); // Convert Japanese to romaji using kuroshiro
+        }
+        if (language === "chinese") {
+            return pinyin(word); // Convert Chinese to pinyin using pinyin library
+        }
+        return word; // For other languages, return the original word
+    }
+
+    // Function to get translation using DeepL API
+    async function getTranslation(word, language) {
+        try {
+            let response = await fetch(`https://api-free.deepl.com/v2/translate?auth_key=YOUR_DEEPL_API_KEY&text=${word}&source_lang=${language.toUpperCase()}&target_lang=EN`);
+            let data = await response.json();
+            return data.translations[0].text; // Return the translated text
+        } catch (error) {
+            console.error("Translation error:", error);
+            return "Translation not available"; // Fallback if translation fails
+        }
+    }
+
+    // Existing code for generating the story
+    $("#generateBtn").click(async function() {
+        let prompt = $("#prompt").val();
+        let level = $("#level").val();
+        let wordLimit = $("#wordLimit").val();
+        let language = $("input[name='language']:checked").val();
+
+        if (!prompt || !level || !wordLimit || !language) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        let requestData = { prompt, level, wordLimit, language };
+
+        // Show loading animation
+        $("#loadingIndicator").removeClass("hidden");
+        $("#textPreview").html("");
+
+        $.ajax({
+            url: "http://127.0.0.1:5000/generate_text",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                // Hide loading animation
+                $("#loadingIndicator").addClass("hidden");
+
+                if (response.success) {
+                    $("#textPreview").empty();
+                    let words = response.text.split(/\s+/);
+
+                    // Append each word as a span with the "word" class
+                    words.forEach(word => {
+                        let span = $("<span>").text(word + " ").addClass("word");
+                        $("#textPreview").append(span);
+                    });
+                } else {
+                    alert("Error generating story: " + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                $("#loadingIndicator").addClass("hidden");
+                alert("Failed to connect to the server: " + error);
+            }
+        });
+    });
+});
